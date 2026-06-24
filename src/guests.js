@@ -1,19 +1,17 @@
+// Add your guests here
+// Each guest has a unique key (used as ?id=KEY in the URL)
 export const guests = {
-  A001: {
-    name: "Ramesh Garu",
-    phone: "9876543210",
-    message: "We are delighted to invite you and your family to our Housewarming Ceremony. Your presence and blessings would mean a lot to us."
+  guest001: {
+    name: "Ramesh & Sunita",
+    message: "Your presence will bless our new home with joy and warmth.",
   },
-
-  A002: {
-    name: "Suresh Garu",
-    phone: "9988776655",
-    message: "We are delighted to invite you and your family to our Housewarming Ceremony. Your presence and blessings would mean a lot to us."
+  guest002: {
+    name: "Priya & Suresh",
+    message: "We joyfully welcome you to share this auspicious occasion with us.",
   },
-
-  A003: {
-    name: "Prasad Garu",
-    phone: "9123456789",
-    message: "We are delighted to invite you and your family to our Housewarming Ceremony. Your presence and blessings would mean a lot to us."
-  }
+  guest003: {
+    name: "Anand Family",
+    message: "Your blessings mean the world to us on this sacred day.",
+  },
+  // Add more guests as needed
 };
