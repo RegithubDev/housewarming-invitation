@@ -1,23 +1,13 @@
 import { useEffect, useState } from "react";
-
-const guests = {
-  A001: {
-    name: "Ramesh Garu",
-    message: "Your presence means a lot to us."
-  },
-  A002: {
-    name: "Suresh Garu",
-    message: "We look forward to celebrating with you."
-  }
-};
+import { guests } from "./guests";
 
 export default function App() {
   const [guest, setGuest] = useState({
     name: "Honored Guest",
-    message: "Please join us."
+    message: "Welcome to our Housewarming Ceremony"
   });
 
-  const [timeLeft, setTimeLeft] = useState("");
+  const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -33,52 +23,87 @@ export default function App() {
       const now = new Date();
       const diff = targetDate - now;
 
+      if (diff <= 0) {
+        setCountdown("🎉 Ceremony Started");
+        return;
+      }
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
       const hours = Math.floor(
         (diff % (1000 * 60 * 60 * 24)) /
         (1000 * 60 * 60)
       );
-      const mins = Math.floor(
+
+      const minutes = Math.floor(
         (diff % (1000 * 60 * 60)) /
         (1000 * 60)
       );
 
-      setTimeLeft(`${days} Days ${hours} Hours ${mins} Minutes`);
+      const seconds = Math.floor(
+        (diff % (1000 * 60)) /
+        1000
+      );
+
+      setCountdown(
+        `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`
+      );
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div style={{ padding: 30, textAlign: "center" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        textAlign: "center",
+        padding: "40px",
+        fontFamily: "Arial"
+      }}
+    >
       <h1>🏠 Housewarming Invitation</h1>
 
-      <h2>{guest.name}</h2>
+      <h2>Dear {guest.name}</h2>
 
       <p>{guest.message}</p>
 
-      <h3>{timeLeft}</h3>
+      <hr />
 
-      <h3>📅 July 3, 2026</h3>
+      <h2>⏳ Countdown</h2>
+      <h3>{countdown}</h3>
 
-      <h3>🕙 10:30 AM</h3>
+      <hr />
 
-      <h3>📍 Hyderabad</h3>
+      <h2>📅 Date</h2>
+      <p>03 July 2026</p>
+
+      <h2>🕙 Time</h2>
+      <p>10:30 AM</p>
+
+      <h2>📍 Venue</h2>
+      <p>Sri Lakshmi Nilayam</p>
+      <p>Hyderabad</p>
+
+      <br />
 
       <a
         href="https://www.google.com/maps/dir/?api=1&destination=17.3850,78.4867"
         target="_blank"
+        rel="noreferrer"
       >
-        Navigate to Venue
+        📍 Navigate to Venue
       </a>
 
-      <br /><br />
+      <br />
+      <br />
 
       <a
-        href="https://wa.me/919441391620?text=We%20will%20attend"
+        href="https://wa.me/919441391620?text=We%20will%20attend%20the%20Housewarming%20Ceremony"
         target="_blank"
+        rel="noreferrer"
       >
-        RSVP on WhatsApp
+        💬 RSVP on WhatsApp
       </a>
     </div>
   );
